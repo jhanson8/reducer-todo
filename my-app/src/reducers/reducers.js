@@ -7,48 +7,34 @@ export const initialState = [
     completed: false,
     id: 3892987589
   },
-  {
-    item: 'Use reducers',
-    completed: false,
-    id: 3892987588
-  },
-  {
-    item: 'Teach reducers',
-    completed: false,
-    id: 3892987587
-  },
 
 ];
 
 export const todoReducer = (state, action) => {
-  // if (action.type === "TOGGLE_EDIT") {
-  //   return {
-  //     ...state,
-  //     editing: !state.editing
-  //   };
-  // }
-  // if (action.type === "UPDATE_TITLE") {
-  //   return {
-  //     ...state,
-  //     title: action.payload,
-  //     editing: false
-  //   };
-  // } else {
-  //   return state;
-  // }
-/*  switch (action.type) {
-    case "TOGGLE_EDIT":
-      return {
-        ...state,
-        editing: !state.editing
-      };
-    case "UPDATE_TITLE":
-      return {
-        ...state,
-        title: action.payload,
-        editing: false
-      };
-    default: */
+  console.log(state, action);
+  switch (action.type) {
+    case 'ADD_TODO':
+          return [
+            ...state,
+            {item: action.payload,
+            completed: false,
+            id: Date.now()}
+          ]
+
+        case 'TOGGLE_COMPLETE':
+          const toggleComplete = state.map(todo => {
+            if(action.payload === todo.id) {
+              return {...todo, completed: !todo.completed}
+            } else {
+              return todo;
+            }
+          })
+          return toggleComplete;
+
+        case 'CLEAR_COMPLETE':
+          const clearCompleted = state.filter(todo => todo.completed === false)
+          return clearCompleted;
+    default:
       return state;
-  
+  }
 };
