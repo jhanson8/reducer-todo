@@ -27,12 +27,12 @@ const TodoList = () => {
            onClick={() => {
              dispatch({ type: 'ADD_TODO', payload: newTodo})
            }}
-         >Add To-do</button>
+         >Add To-Do</button>
          <button
            onClick={() => {
              dispatch({ type: 'CLEAR_COMPLETE'})
            }}
-         >Clear List</button>
+         >Clear Completed</button>
        </div>
      <div>
            {state.map(todo => (
